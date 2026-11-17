@@ -1,0 +1,16 @@
+.program ntr_card_qspi
+
+.define PIN_SCLK 11
+.define PIN_CS 21
+
+spi_start:
+	mov isr null
+    wait 1 gpio PIN_CS
+    wait 0 gpio PIN_CS
+
+.wrap_target
+    wait 0 gpio PIN_SCLK
+    wait 1 gpio PIN_SCLK
+    in pins, 4
+	jmp pin spi_start
+	.wrap
